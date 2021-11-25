@@ -4,7 +4,7 @@ Currently under construction, net-zero carbon questionnaire.
 
 
 
-Template and components from Creative Tim under free lisence. 
+Template and components from Creative Tim under free licence. 
 
 ### Social Media
 
