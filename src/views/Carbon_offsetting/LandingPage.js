@@ -55,7 +55,7 @@ export default function CarbonOffsetting(props) {
                 Positive section. This is where you can find out how to sponsor
                 our projects. We are aiming to increase green spaces, grow fruit
                 and vegetables for the local community, increase wildlife
-                spaces, and much more. TESTING
+                spaces, and much more.
               </h4>
               <br />
               <Button
