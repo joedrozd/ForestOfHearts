@@ -28,21 +28,14 @@ import { Chart } from "react-google-charts";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
+import Bolt from "@mui/icons-material/Bolt";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import CollapsibleTable from "./carbonfootprinttable";
-import WorkSection from "views/LandingPage/Sections/WorkSection";
 import { Link } from "react-router-dom";
+import { ContactSupport } from "@material-ui/icons";
+import ContactSection from "./WorkSection";
 
 const useStyles = makeStyles(styles);
 
@@ -93,7 +86,7 @@ export default function ProfilePage(props) {
             </GridContainer>
             <Box m={4}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={12}>
                   <div>
                     <h5 className={classes.description}>
                       Welcome to your profile page. We’re really excited to be
@@ -115,7 +108,7 @@ export default function ProfilePage(props) {
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <GridItem xs={12} sm={12} md={6}>
+                      <GridItem xs={12} sm={12} md={2}>
                         <Link to={"/net-zero"}>
                           <Button color="primary" round>
                             Net-Zero Quiz
@@ -130,70 +123,106 @@ export default function ProfilePage(props) {
                     </h5>
                   </div>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <Card>
-                    <CardBody>
-                      <h3 className={classes.title}>Achieveable Goals</h3>
-                      <div>
-                        <ul>
-                          <li>Insulate my house</li>
-                          <li>Reduce meat consumption</li>
-                          <li>Install solar panels</li>
-                          <li>Recycle more</li>
-                          <li>Switch off not standby</li>
-                        </ul>
-                      </div>
-                      <SettingsIcon />
-                    </CardBody>
-                  </Card>
-                </GridItem>
               </GridContainer>
             </Box>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={6}>
-                <Chart
-                  width={"500px"}
-                  height={"300px"}
-                  chartType="PieChart"
-                  loader={<div>Loading Chart</div>}
-                  data={[
-                    ["Task", "Hours per Day"],
-                    ["Work", 11],
-                    ["Food", 2],
-                    ["Commute", 2],
-                    ["Watch TV", 2],
-                    ["Sleep", 7],
-                  ]}
-                  options={{
-                    title: "My Carbon Usage",
-                    // Just add this option
-                    is3D: true,
-                  }}
-                  rootProps={{ "data-testid": "2" }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CollapsibleTable></CollapsibleTable>
-              </GridItem>
-            </GridContainer>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={12}>
-                <Card>
-                  <CardBody>
-                    <h3 className={classes.title}>Resources</h3>
-                    <div>
-                      <ul>
-                        <li>How to insulate a house</li>
-                        <li>Best vegan alternatives</li>
-                        <li>How to apply for green homes grant</li>
-                        <li>What can you recycle?</li>
-                      </ul>
-                    </div>
-                  </CardBody>
-                </Card>
-              </GridItem>
-            </GridContainer>
-            <WorkSection />
+            <Box m={4}>
+              <NavPills
+                horizontal={{
+                  tabsGrid: { xs: 12, sm: 4, md: 2 },
+                  contentGrid: { xs: 12, sm: 8, md: 10 },
+                }}
+                color="info"
+                tabs={[
+                  {
+                    tabButton: "Goals and Settings",
+                    tabIcon: SettingsIcon,
+                    tabContent: (
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <Card>
+                            <CardBody>
+                              <h3 className={classes.title}>
+                                Achieveable Goals
+                              </h3>
+                              <div>
+                                <ul>
+                                  <li>Insulate my house</li>
+                                  <li>Reduce meat consumption</li>
+                                  <li>Install solar panels</li>
+                                  <li>Recycle more</li>
+                                  <li>Switch off not standby</li>
+                                </ul>
+                              </div>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
+                    ),
+                  },
+                  {
+                    tabButton: "Transport",
+                    tabIcon: DirectionsCarIcon,
+                    tabContent: (
+                      <GridContainer justify="center">
+                        <GridItem xs={12} sm={12} md={6}>
+                          <Chart
+                            width={"500px"}
+                            height={"300px"}
+                            chartType="PieChart"
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                              ["Task", "Hours per Day"],
+                              ["Work", 11],
+                              ["Food", 2],
+                              ["Commute", 2],
+                              ["Watch TV", 2],
+                              ["Sleep", 7],
+                            ]}
+                            options={{
+                              title: "My Carbon Usage",
+                              // Just add this option
+                              is3D: true,
+                            }}
+                            rootProps={{ "data-testid": "2" }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={6}>
+                          <CollapsibleTable></CollapsibleTable>
+                        </GridItem>
+                      </GridContainer>
+                    ),
+                  },
+                  {
+                    tabButton: "Reducing Energy",
+                    tabIcon: Bolt,
+                    tabContent: (
+                      <GridContainer justify="center">
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Card>
+                            <CardBody>
+                              <h3 className={classes.title}>Resources</h3>
+                              <div>
+                                <ul>
+                                  <li>How to insulate a house</li>
+                                  <li>Best vegan alternatives</li>
+                                  <li>How to apply for green homes grant</li>
+                                  <li>What can you recycle?</li>
+                                </ul>
+                              </div>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      </GridContainer>
+                    ),
+                  },
+                  {
+                    tabButton: "Contact Us",
+                    tabIcon: ContactSupport,
+                    tabContent: <ContactSection />,
+                  },
+                ]}
+              />
+            </Box>
           </div>
         </div>
       </div>

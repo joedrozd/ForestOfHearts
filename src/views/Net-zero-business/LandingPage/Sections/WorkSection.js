@@ -14,7 +14,7 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/work
 
 const useStyles = makeStyles(styles);
 /* eslint-disable no-unused-vars */
-const ContactSection = () => {
+const WorkSection = () => {
   const classes = useStyles();
   const [status, setStatus] = useState("Submit");
   const handleSubmit = async (e) => {
@@ -43,11 +43,12 @@ const ContactSection = () => {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem cs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Contact us</h2>
+          <h2 className={classes.title}>Work with us</h2>
           <h4 className={classes.description}>
-            Having trouble with a page? Want to further understand your results?
-            Anything else? Drop an email in the contact form below or contact us
-            on our social media pages.
+            Are you a business looking to partner with us? We have several ways
+            you can contribute to the charity or reduce your carbon footprint
+            with us. Interested? Drop an email in the contact form below or
+            contact us on our social media pages.
           </h4>
           <form id="contact-form" onSubmit={handleSubmit} method="POST">
             <GridContainer>
@@ -97,4 +98,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export default WorkSection;

@@ -177,6 +177,17 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          target="_blank"
+          
+        >
+          <Link to="/net-zero-business" className={classes.navLink}>
+              Net Zero Business
+            </Link>
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Profile"
