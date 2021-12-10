@@ -31,14 +31,15 @@ export default function Transport() {
     classes.imgFluid
   );
   const [values, setValues] = useState({
-    emission_factor: "",
+    emission_factor:
+      "passenger_vehicle-vehicle_type_sports_car-fuel_source_diesel-engine_size_na-vehicle_age_na-vehicle_weight_na",
     parameters: {
-      distance: {},
-      distance_unit: "",
+      distance: 100,
+      distance_unit: "km",
     },
     metadata: {
-      scope: "",
-      category: "",
+      scope: "2",
+      category: "string",
     },
   });
   const saveFormData = async () => {
@@ -48,7 +49,11 @@ export default function Transport() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
-    });
+    })
+      .then((response) => response.json())
+      .then((values) => {
+        console.log(values);
+      });
     if (response.status !== 200) {
       throw new Error(`Request failed: ${response.status}`);
     }
