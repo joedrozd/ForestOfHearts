@@ -1,10 +1,9 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import axios from "axios";
 // @material-ui/icons
 /* eslint-disable no-unused-vars */
 // core components
@@ -30,57 +29,36 @@ export default function Transport() {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const [values, setValues] = useState({
-    emission_factor:
-      "passenger_vehicle-vehicle_type_sports_car-fuel_source_diesel-engine_size_na-vehicle_age_na-vehicle_weight_na",
-    parameters: {
-      distance: 100,
-      distance_unit: "km",
-    },
-    metadata: {
-      scope: "2",
-      category: "string",
-    },
-  });
-  const saveFormData = async () => {
-    const response = await fetch("http://localhost:8000/api/vehicle", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-      .then((response) => response.json())
-      .then((values) => {
-        console.log(values);
-      });
-    if (response.status !== 200) {
-      throw new Error(`Request failed: ${response.status}`);
-    }
+  let [vehicleType, setVehicleType] = useState("");
+  const handleChange = (event) => {
+    setVehicleType(event.target.value);
   };
-  const onSubmit = async (event) => {
-    event.preventDefault(); // Prevent default submission
-    try {
-      await saveFormData();
-      alert("Your results are ready!");
-      setValues({
-        emission_factor:
-          "passenger_vehicle-vehicle_type_sports_car-fuel_source_diesel-engine_size_na-vehicle_age_na-vehicle_weight_na",
-        parameters: {
-          distance: 100,
-          distance_unit: "km",
-        },
-        metadata: {
-          scope: "2",
-          category: "string",
-        },
-      });
-      console.log(values);
-    } catch (e) {
-      alert(`Results failed! ${e.message}`);
-    }
+  let [carType, setCarType] = useState("");
+  const handleChange2 = (event) => {
+    setCarType(event.target.value);
   };
 
+  const submitForm = async (event) => {
+    event.preventDefault(); // Prevent default submission
+    const data2 = document.getElementById("miles").value;
+    const data =
+      "passenger_vehicle-vehicle_type_" +
+      carType +
+      "-fuel_source_" +
+      vehicleType +
+      "-engine_size_na-vehicle_age_na-vehicle_weight_na";
+    axios
+      .post(`http://localhost:8000/api/vehicle/`, { data, data2 })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .then((data) => data.json())
+      .catch((error) => {
+        console.log("got errr while posting data", error);
+      });
+    alert("bing");
+  };
   return (
     <div className={classes.section}>
       <h2 className={classes.title}>Transport and Travel</h2>
@@ -133,7 +111,7 @@ export default function Transport() {
           Add a vehicle, enter the following data and then either add another
           vehicle or submit and see results.
         </h3>
-        <form id="vehicle" onSubmit={onSubmit}>
+        <form id="vehicle" onSubmit={submitForm}>
           <h3 className={classes.title}>What type of car do you have?</h3>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>
@@ -142,17 +120,19 @@ export default function Transport() {
                   Car type?
                 </InputLabel>
                 <NativeSelect
-                  defaultValue="small"
-                  id="car-type"
-                  value={values.car_type}
+                  onChange={handleChange2}
+                  defaultValue="large_car"
+                  value={carType}
+                  id="car_type"
                   inputProps={{
                     name: "vehicle",
                     id: "uncontrolled-native",
                   }}
                 >
-                  <option value={0}>Hybrid</option>
-                  <option value={1}>Petrol</option>
-                  <option value={2}>Diesel</option>
+                  <option value="large_car">Big car</option>
+                  <option value="car">Medium Car</option>
+                  <option value="small_car">Small Car</option>
+                  <option value="sports_car">Sports Car</option>
                 </NativeSelect>
               </FormControl>
             </GridItem>
@@ -167,24 +147,19 @@ export default function Transport() {
                   Fuel type?
                 </InputLabel>
                 <NativeSelect
-                  defaultValue="gas"
-                  id="fuel-type"
-                  value={values.fuel_type}
+                  value={vehicleType}
+                  defaultValue="petrol"
+                  onChange={handleChange}
+                  id="vehicle_type"
                   inputProps={{
                     name: "vehicle",
                     id: "uncontrolled-native",
                   }}
                 >
-                  <option value={0}>Petrol</option>
-                  <option value={1}>Hybrid</option>
-                  <option value={2}>Biogas</option>
-                  <option value={3}>Diesel</option>
-                  <option value={4}>Natural Gas</option>
-                  <option value={5}>Electric</option>
-                  <option value={6}>Biodiesel</option>
-                  <option value={7}>Ethanol 85</option>
-                  <option value={8}>Ethanol 10</option>
-                  <option value={9}>Plug In Hybrid</option>
+                  <option value={"petrol"}>Petrol</option>
+                  <option value={"bev"}>Electric</option>
+                  <option value={"hev"}>Hybrid</option>
+                  <option value={"diesel"}>Diesel</option>
                 </NativeSelect>
               </FormControl>
             </GridItem>
@@ -195,7 +170,6 @@ export default function Transport() {
               <CustomInput
                 labelText="Miles per gallon"
                 id="mpg"
-                value={values.mpg}
                 formControlProps={{
                   fullWidth: true,
                 }}
@@ -210,7 +184,6 @@ export default function Transport() {
               <CustomInput
                 labelText="Miles driven per year"
                 id="miles"
-                value={values.miles}
                 formControlProps={{
                   fullWidth: true,
                 }}
