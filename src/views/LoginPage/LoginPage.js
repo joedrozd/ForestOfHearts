@@ -53,6 +53,7 @@ export default function LoginPage({ setToken }) {
       password: data3,
     });
     setToken(user);
+    localStorage.setItem("email", data2);
     console.log(user);
   };
   return (

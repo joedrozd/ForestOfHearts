@@ -47,17 +47,20 @@ export default function Transport() {
       "-fuel_source_" +
       vehicleType +
       "-engine_size_na-vehicle_age_na-vehicle_weight_na";
+    console.log("s");
     axios
       .post(`http://localhost:8000/api/vehicle/`, { data, data2 })
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
+        return res.json();
       })
-      .then((data) => data.json())
+      .then((jsonData) => {
+        console.log(jsonData);
+        return jsonData;
+      })
       .catch((error) => {
         console.log("got errr while posting data", error);
       });
-    alert("bing");
+    console.log("s-done");
   };
   return (
     <div className={classes.section}>
@@ -177,7 +180,7 @@ export default function Transport() {
             </GridItem>
           </GridContainer>
           <h3 className={classes.title}>
-            How many km do you drive in a year on average?
+            How many Miles do you drive in a year on average?
           </h3>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
@@ -203,6 +206,12 @@ export default function Transport() {
             </GridItem>
           </GridContainer>
         </form>
+        <h3 className={classes.title}>Your Results:</h3>
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={4}>
+            <h3 className={classes.title}>Donuts</h3>
+          </GridItem>
+        </GridContainer>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-
 /* eslint-disable no-unused-vars */
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -21,10 +20,11 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import profile from "assets/img/faces/christian.jpg";
+import profile from "assets/img/faces/FoH.jpg";
 import { Box } from "@mui/system";
 import { render } from "react-dom";
 import { Chart } from "react-google-charts";
+import axios from "axios";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 
@@ -39,15 +39,36 @@ import ContactSection from "./WorkSection";
 
 const useStyles = makeStyles(styles);
 
+function populateHeader(obj) {
+  const userInfo = document.getElementById("UserInfo");
+  const myH1 = document.createElement("h1");
+  const userDataParsed = obj["data"]["message"]["name"];
+  myH1.textContent = userDataParsed;
+  userInfo.appendChild(myH1);
+  const myPara = document.createElement("p");
+  myPara.textContent = obj["data"]["message"]["email"];
+  userInfo.appendChild(myPara);
+}
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
-  );
+  const imageClasses = classNames(classes.imgRaised, classes.imgFluid);
+  const email = localStorage.getItem("email");
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  axios
+    .post("http://localhost:8000/api/userget/", {
+      email: email,
+    })
+    .then(function (response) {
+      const userData = response;
+      populateHeader(userData);
+      console.log(userData);
+      return;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   return (
     <div>
       <Header
@@ -76,10 +97,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Joe Drozd</h3>
-                    <br />
-                    <h4 className={classes.title}>Forest of Hearts</h4>
-                    <h6>Web Developer</h6>
+                    <div id="UserInfo"></div>
                   </div>
                 </div>
               </GridItem>
@@ -92,34 +110,6 @@ export default function ProfilePage(props) {
                       Welcome to your profile page. We’re really excited to be
                       working with you to save our environment and reduce our
                       carbon footprints!
-                    </h5>
-                    <h5 className={classes.description}>
-                      This page is designed to show you the results of your
-                      Carbon Footprint Net-Zero questionnaire. It tracks all
-                      your answers and then calculates your footprint. The
-                      application then takes your answers and gives you a list
-                      of goals based on your activities.
-                    </h5>
-                    <h5 className={classes.description}>
-                      Click the button below to take the quiz!
-                    </h5>
-                    <GridContainer
-                      direction="column"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <GridItem xs={12} sm={12} md={2}>
-                        <Link to={"/net-zero"}>
-                          <Button color="primary" round>
-                            Net-Zero Quiz
-                          </Button>
-                        </Link>
-                      </GridItem>
-                    </GridContainer>
-                    <h5 className={classes.description}>
-                      You can change answers in the quiz at any point if your
-                      answers change. This can then recalculate your goals and
-                      change the resources to your new and improved answers.
                     </h5>
                   </div>
                 </GridItem>
@@ -137,26 +127,62 @@ export default function ProfilePage(props) {
                     tabButton: "Goals and Settings",
                     tabIcon: SettingsIcon,
                     tabContent: (
-                      <GridContainer>
-                        <GridItem xs={12} sm={12} md={6}>
-                          <Card>
-                            <CardBody>
-                              <h3 className={classes.title}>
-                                Achieveable Goals
-                              </h3>
-                              <div>
-                                <ul>
-                                  <li>Insulate my house</li>
-                                  <li>Reduce meat consumption</li>
-                                  <li>Install solar panels</li>
-                                  <li>Recycle more</li>
-                                  <li>Switch off not standby</li>
-                                </ul>
-                              </div>
-                            </CardBody>
-                          </Card>
-                        </GridItem>
-                      </GridContainer>
+                      <div>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <h5 className={classes.description}>
+                              This page is designed to show you the results of
+                              your Carbon Footprint Net-Zero questionnaire. It
+                              tracks all your answers and then calculates your
+                              footprint. The application then takes your answers
+                              and gives you a list of goals based on your
+                              activities.
+                            </h5>
+                            <h5 className={classes.description}>
+                              Click the button below to take the quiz!
+                            </h5>
+                            <GridContainer
+                              direction="column"
+                              alignItems="center"
+                              justifyContent="center"
+                            >
+                              <GridItem xs={12} sm={12} md={2}>
+                                <Link to={"/net-zero-business"}>
+                                  <Button color="primary" round>
+                                    Net-Zero Quiz
+                                  </Button>
+                                </Link>
+                              </GridItem>
+                            </GridContainer>
+                            <h5 className={classes.description}>
+                              You can change answers in the quiz at any point if
+                              your answers change. This can then recalculate
+                              your goals and change the resources to your new
+                              and improved answers.
+                            </h5>
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <Card>
+                              <CardBody>
+                                <h3 className={classes.title}>
+                                  Achieveable Goals
+                                </h3>
+                                <div>
+                                  <ul>
+                                    <li>Insulate my house</li>
+                                    <li>Reduce meat consumption</li>
+                                    <li>Install solar panels</li>
+                                    <li>Recycle more</li>
+                                    <li>Switch off not standby</li>
+                                  </ul>
+                                </div>
+                              </CardBody>
+                            </Card>
+                          </GridItem>
+                        </GridContainer>
+                      </div>
                     ),
                   },
                   {

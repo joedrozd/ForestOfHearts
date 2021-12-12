@@ -25,6 +25,7 @@ const useStyles = makeStyles(styles);
 
 function Logout(){
   localStorage.removeItem('token');
+  localStorage.removeItem('email');
   location.reload();
 }
 

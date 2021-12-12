@@ -6,7 +6,6 @@ import Favorite from "@material-ui/icons/Favorite";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import TreePlanting from "../../../assets/img/tree-planting.jpg";
 import GridContainer from "components/Grid/GridContainer";
@@ -41,10 +40,8 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Tree Planting
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Tree Planting</h2>
+                  <h5 className={classes.description}>
                     Help us plant 2021 trees to provide wildlife friendly hedges
                     that help to sequester CO2, reduce pollution and give back
                     to the local community. Below are five ways you can help to
@@ -54,7 +51,7 @@ export default function Nature_Positive() {
                     our health and wellbeing projects benefiting people
                     experiencing anxiety, depression and mental health
                     difficulties.
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -75,10 +72,8 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Hedgerow planting
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Hedgerow planting</h2>
+                  <h5 className={classes.description}>
                     This year you can help us plant over 1000 metres of hedgerow
                     which will act as a haven for wildlife and biodiversity. The
                     main function of the hedgerows is to create a natural
@@ -86,7 +81,7 @@ export default function Nature_Positive() {
                     which is conducive to supporting the mix of edible plants
                     that will make up the forest garden. You can get involved by
                     sponsoring a meter of hedgerow now.
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -111,14 +106,12 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Green Therapy
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Green Therapy</h2>
+                  <h5 className={classes.description}>
                     Green Therapy offers a skills programme of weekly activities
                     for local people who are inactive or long term unemployed,
                     experiencing social isolation and/or poor wellbeing.
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -140,10 +133,8 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Grow Now
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Grow Now</h2>
+                  <h5 className={classes.description}>
                     Grow Now is an innovative programme which provide
                     opportunities to grow skills, knowledge, contacts and
                     confidence whilst helping to create the Garden of Wellbeing
@@ -151,7 +142,7 @@ export default function Nature_Positive() {
                     the European Social Fund and the Education and Skills
                     Funding Agency, and supported by the Local Enterprise
                     Partnership.
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -176,17 +167,15 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Carbon Zero Event Day
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Carbon Zero Event Day</h2>
+                  <h5 className={classes.description}>
                     Carbon Zero Event Day. Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. Ut enim ad
                     minim veniam, quis nostrud exercitation ullamco laboris nisi
                     ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                     reprehenderit in voluptate velit esse cillum dol
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>
@@ -207,16 +196,14 @@ export default function Nature_Positive() {
                   className="zoom"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h3" component="div">
-                    Orchard
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <h2 className={classes.title}>Orchard</h2>
+                  <h5 className={classes.description}>
                     The Forest of Hearts Traditional Orchard will be planted
                     with a number of fruit trees. The orchard will be a place of
                     peace and tranquility aimed at growing a wide range of
                     heritage and popular apples, pears, plums, cherries, quince
                     and medlars.
-                  </Typography>
+                  </h5>
                 </CardContent>
               </CardActionArea>
               <CardActions>

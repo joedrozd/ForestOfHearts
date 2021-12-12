@@ -5,7 +5,6 @@ import { useState } from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 // @material-ui/icons
@@ -17,7 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
-
+import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 
@@ -32,61 +31,61 @@ export default function Reduce_energy() {
   const imageClasses = classNames(classes.imgRaised, classes.imgFluid);
   const [checkedA, setCheckedA] = React.useState(true);
   const [checkedB, setCheckedB] = React.useState(false);
-  const [values, setValues] = useState({
-    electric_type: "",
-    gas_type: "",
-    smart_meter: "",
-    fuel_type: "",
-    solar_panel: "",
-    average_rating: "",
-    standby: "",
-  });
-  const saveFormData = async () => {
-    const response = await fetch("https://beta2.api.climatiq.io/estimate", {
-      method: "POST",
-      dataType: "jsonp",
-      headers: {
-        Authorization: "Bearer 	086418AGFV4QHCN9E55CJTQ9JHTV",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    if (response.status !== 200) {
-      throw new Error(`Request failed: ${response.status}`);
-    }
+  let [gasUse, setGasUse] = useState("");
+  const handleChange2 = (event) => {
+    setGasUse(event.target.value);
   };
-  const onSubmit = async (event) => {
+  let [fuelType, setFuelType] = useState("");
+  const handleChange3 = (event) => {
+    setFuelType(event.target.value);
+  };
+  let [solarPanel, setSolarPanel] = useState("");
+  const handleChange4 = (event) => {
+    setSolarPanel(event.target.value);
+  };
+  let [averageRating, setAverageRating] = useState("");
+  const handleChange5 = (event) => {
+    setAverageRating(event.target.value);
+  };
+  let [standby, setStandby] = useState("");
+  const handleChange6 = (event) => {
+    setStandby(event.target.value);
+  };
+
+  const submitForm = async (event) => {
     event.preventDefault(); // Prevent default submission
-    try {
-      await saveFormData();
-      alert("Your registration was successfully submitted!");
-      setValues({
-        electric_type: "",
-        gas_type: "",
-        smart_meter: "",
-        fuel_type: "",
-        solar_panel: "",
-        average_rating: "",
-        standby: "",
+    const electric = document.getElementById("electricUse").value;
+    axios
+      .post(`http://localhost:8000/api/energy/`, { electric })
+      .then((res) => {
+        return res.json();
+      })
+      .then((jsonData) => {
+        console.log(jsonData);
+        return jsonData;
+      })
+      .catch((error) => {
+        console.log("got errr while posting data", error);
       });
-    } catch (e) {
-      alert(`Registration failed! ${e.message}`);
-    }
+    console.log("s-done");
   };
-  React.useEffect(() => {
-    if (
-      !document
-        .getElementById("sliderRegular2")
-        .classList.contains("noUi-target")
-    ) {
-      Slider.create(document.getElementById("sliderRegular2"), {
-        start: [0],
-        connect: [true, false],
-        step: 1,
-        range: { min: 0, max: 100 },
+  const submitForm2 = async (event) => {
+    event.preventDefault(); // Prevent default submission
+    const gas = document.getElementById("gasUse").value;
+    axios
+      .post(`http://localhost:8000/api/gas/`, { gas })
+      .then((res) => {
+        return res.json();
+      })
+      .then((jsonData) => {
+        console.log(jsonData);
+        return jsonData;
+      })
+      .catch((error) => {
+        console.log("got errr while posting data", error);
       });
-    }
-  });
+    console.log("s-done");
+  };
   return (
     <div className={classes.section}>
       <div>
@@ -116,7 +115,7 @@ export default function Reduce_energy() {
           <br />
         </h5>
         <br />
-        <form id="energy" onSubmit={onSubmit}>
+        <form id="energy" onSubmit={submitForm}>
           <h3 className={classes.title}>
             How much gas and electric do you use per year in your house?
           </h3>
@@ -124,53 +123,39 @@ export default function Reduce_energy() {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <CustomInput
-                labelText="Electric used kWh per year"
-                id="float"
-                value={values.electric_use}
+                labelText="Electric used: kWh per year"
+                id="electricUse"
                 formControlProps={{
                   fullWidth: true,
                 }}
               />
             </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              <Button color="primary" round type="submit">
+                Submit
+              </Button>
+            </GridItem>
           </GridContainer>
+        </form>
+        <form id="gas" onSubmit={submitForm2}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <CustomInput
-                labelText="Gas used kWh per year"
-                id="float"
-                value={values.gas_use}
+                labelText="Gas used: Pounds(£) spent on Gas"
+                id="gasUse"
                 formControlProps={{
                   fullWidth: true,
                 }}
               />
             </GridItem>
-          </GridContainer>
-
-          <h3 className={classes.title}>Do you have a smart meter?</h3>
-          <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={checkedA}
-                    onChange={(event) => setCheckedA(event.target.checked)}
-                    value="checkedA"
-                    classes={{
-                      switchBase: classes.switchBase,
-                      checked: classes.switchChecked,
-                      thumb: classes.switchIcon,
-                      iconChecked: classes.switchIconChecked,
-                      track: classes.switchBar,
-                    }}
-                  />
-                }
-                classes={{
-                  label: classes.label,
-                }}
-                label="Smart meter?"
-              />
+              <Button color="primary" round type="submit">
+                Submit
+              </Button>
             </GridItem>
           </GridContainer>
+        </form>
+        <form id="infoEnergy">
           <h3 className={classes.title}>
             What is the main energy type your provider uses?{" "}
           </h3>
@@ -182,7 +167,8 @@ export default function Reduce_energy() {
                 </InputLabel>
                 <NativeSelect
                   defaultValue={30}
-                  value={values.fuel_type}
+                  value={fuelType}
+                  onChange={handleChange3}
                   inputProps={{
                     name: "energy_type",
                     id: "uncontrolled-native",
@@ -197,15 +183,6 @@ export default function Reduce_energy() {
             </GridItem>
           </GridContainer>
           <h3 className={classes.title}>
-            What percentage of your energy is from renewable, green, or nuclear
-            sources?{" "}
-          </h3>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6}>
-              <div id="sliderRegular2" className="slider-primary" />
-            </GridItem>
-          </GridContainer>
-          <h3 className={classes.title}>
             Have you installed solar panels on your place of residence?{" "}
           </h3>
           <GridContainer justify="center">
@@ -214,7 +191,8 @@ export default function Reduce_energy() {
                 <FormControlLabel
                   control={<Checkbox defaultUnchecked />}
                   label="Yes"
-                  value={values.solar_panel}
+                  value={solarPanel}
+                  onChange={handleChange4}
                 />
               </FormGroup>
             </GridItem>
@@ -230,7 +208,8 @@ export default function Reduce_energy() {
                 </InputLabel>
                 <NativeSelect
                   defaultValue={30}
-                  value={values.average_rating}
+                  value={averageRating}
+                  onChange={handleChange5}
                   inputProps={{
                     name: "appliance_rating",
                     id: "uncontrolled-native",
@@ -260,7 +239,8 @@ export default function Reduce_energy() {
                 </InputLabel>
                 <NativeSelect
                   defaultValue={30}
-                  value={values.standby}
+                  onChange={handleChange6}
+                  value={standby}
                   inputProps={{
                     name: "standby_value",
                     id: "uncontrolled-native",
@@ -274,11 +254,6 @@ export default function Reduce_energy() {
             </GridItem>
           </GridContainer>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6}>
-              <Button color="primary" round>
-                Add another vehicle
-              </Button>
-            </GridItem>
             <GridItem xs={12} sm={12} md={6}>
               <Button color="primary" round type="submit">
                 Submit
