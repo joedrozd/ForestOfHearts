@@ -51,23 +51,18 @@ export default function Reduce_energy() {
   const handleChange6 = (event) => {
     setStandby(event.target.value);
   };
-
   const submitForm = async (event) => {
     event.preventDefault(); // Prevent default submission
     const electric = document.getElementById("electricUse").value;
     axios
       .post(`http://localhost:8000/api/energy/`, { electric })
       .then((res) => {
-        return res.json();
-      })
-      .then((jsonData) => {
-        console.log(jsonData);
-        return jsonData;
+        const returnText = res.data;
+        console.log(returnText);
       })
       .catch((error) => {
         console.log("got errr while posting data", error);
       });
-    console.log("s-done");
   };
   const submitForm2 = async (event) => {
     event.preventDefault(); // Prevent default submission
@@ -75,16 +70,13 @@ export default function Reduce_energy() {
     axios
       .post(`http://localhost:8000/api/gas/`, { gas })
       .then((res) => {
-        return res.json();
-      })
-      .then((jsonData) => {
-        console.log(jsonData);
-        return jsonData;
+        const returnText = res.data;
+        console.log(returnText);
+        return;
       })
       .catch((error) => {
         console.log("got errr while posting data", error);
       });
-    console.log("s-done");
   };
   return (
     <div className={classes.section}>

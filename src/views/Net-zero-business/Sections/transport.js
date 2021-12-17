@@ -47,20 +47,15 @@ export default function Transport() {
       "-fuel_source_" +
       vehicleType +
       "-engine_size_na-vehicle_age_na-vehicle_weight_na";
-    console.log("s");
     axios
       .post(`http://localhost:8000/api/vehicle/`, { data, data2 })
       .then((res) => {
-        return res.json();
-      })
-      .then((jsonData) => {
-        console.log(jsonData);
-        return jsonData;
+        console.log(res.data);
+        return;
       })
       .catch((error) => {
-        console.log("got errr while posting data", error);
+        console.log("got err while posting data", error);
       });
-    console.log("s-done");
   };
   return (
     <div className={classes.section}>
