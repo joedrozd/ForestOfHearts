@@ -19,13 +19,23 @@ import NativeSelect from "@mui/material/NativeSelect";
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
-
 import CustomInput from "components/CustomInput/CustomInput.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import energy_solar from "../../../assets/img/energy-solar.jpg";
 import Slider from "nouislider";
 const useStyles = makeStyles(styles);
-
+function populateEnergy(obj) {
+  const data = obj["co2e"];
+  const userInfo = document.getElementById("energyResults");
+  const myH2 = " " + data + " kg of CO2 produced each year.";
+  userInfo.append(myH2);
+}
+function populateGas(obj) {
+  const data = obj["co2e"];
+  const userInfo = document.getElementById("gasResults");
+  const myH2 = " " + data + " kg of CO2 produced each year.";
+  userInfo.append(myH2);
+}
 export default function Reduce_energy() {
   const classes = useStyles();
   const imageClasses = classNames(classes.imgRaised, classes.imgFluid);
@@ -55,10 +65,12 @@ export default function Reduce_energy() {
     event.preventDefault(); // Prevent default submission
     const electric = document.getElementById("electricUse").value;
     axios
-      .post(`http://localhost:8000/api/energy/`, { electric })
+      .post(`/api/energy/`, { electric })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
+        populateEnergy(returnText);
+        return;
       })
       .catch((error) => {
         console.log("got errr while posting data", error);
@@ -68,10 +80,11 @@ export default function Reduce_energy() {
     event.preventDefault(); // Prevent default submission
     const gas = document.getElementById("gasUse").value;
     axios
-      .post(`http://localhost:8000/api/gas/`, { gas })
+      .post(`/api/gas/`, { gas })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
+        populateGas(returnText);
         return;
       })
       .catch((error) => {
@@ -127,8 +140,16 @@ export default function Reduce_energy() {
                 Submit
               </Button>
             </GridItem>
+            <div>
+              <div id="UserInfo">
+                <h2 className={classes.title} id="energyResults">
+                  Your Results are:
+                </h2>
+              </div>
+            </div>
           </GridContainer>
         </form>
+
         <form id="gas" onSubmit={submitForm2}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
@@ -145,8 +166,16 @@ export default function Reduce_energy() {
                 Submit
               </Button>
             </GridItem>
+            <div>
+              <div id="UserInfo2">
+                <h2 className={classes.title} id="gasResults">
+                  Your Results are:
+                </h2>
+              </div>
+            </div>
           </GridContainer>
         </form>
+
         <form id="infoEnergy">
           <h3 className={classes.title}>
             What is the main energy type your provider uses?{" "}

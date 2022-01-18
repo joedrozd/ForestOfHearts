@@ -29,7 +29,7 @@ import { Switch } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 async function signUpUser(credentials) {
-  return fetch("http://localhost:8000/api/signup", {
+  return fetch("/api/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

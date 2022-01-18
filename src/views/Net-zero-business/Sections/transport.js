@@ -21,7 +21,13 @@ import FormGroup from "@mui/material/FormGroup";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
 const useStyles = makeStyles(styles);
-
+function populateVehicle(obj) {
+  const data = obj["co2e"];
+  const userInfo = document.getElementById("vehicleResults");
+  const myH2 = " " + data + " kg of CO2 produced each year.";
+  userInfo.append(myH2);
+  return;
+}
 export default function Transport() {
   const classes = useStyles();
   const imageClasses = classNames(
@@ -48,9 +54,11 @@ export default function Transport() {
       vehicleType +
       "-engine_size_na-vehicle_age_na-vehicle_weight_na";
     axios
-      .post(`http://localhost:8000/api/vehicle/`, { data, data2 })
+      .post(`/api/vehicle/`, { data, data2 })
       .then((res) => {
-        console.log(res.data);
+        const returnText = res.data;
+        console.log(returnText);
+        populateVehicle(returnText);
         return;
       })
       .catch((error) => {
@@ -119,7 +127,7 @@ export default function Transport() {
                 </InputLabel>
                 <NativeSelect
                   onChange={handleChange2}
-                  defaultValue="large_car"
+                  defaultValue="null"
                   value={carType}
                   id="car_type"
                   inputProps={{
@@ -127,6 +135,7 @@ export default function Transport() {
                     id: "uncontrolled-native",
                   }}
                 >
+                  <option value="null">Select an option from the list!</option>
                   <option value="large_car">Big car</option>
                   <option value="car">Medium Car</option>
                   <option value="small_car">Small Car</option>
@@ -146,7 +155,7 @@ export default function Transport() {
                 </InputLabel>
                 <NativeSelect
                   value={vehicleType}
-                  defaultValue="petrol"
+                  defaultValue="null"
                   onChange={handleChange}
                   id="vehicle_type"
                   inputProps={{
@@ -154,24 +163,13 @@ export default function Transport() {
                     id: "uncontrolled-native",
                   }}
                 >
+                  <option value="null">Select an option from the list!</option>
                   <option value={"petrol"}>Petrol</option>
                   <option value={"bev"}>Electric</option>
                   <option value={"hev"}>Hybrid</option>
                   <option value={"diesel"}>Diesel</option>
                 </NativeSelect>
               </FormControl>
-            </GridItem>
-          </GridContainer>
-          <h3 className={classes.title}>How fuel efficient is your car? </h3>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
-              <CustomInput
-                labelText="Miles per gallon"
-                id="mpg"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
             </GridItem>
           </GridContainer>
           <h3 className={classes.title}>
@@ -201,10 +199,14 @@ export default function Transport() {
             </GridItem>
           </GridContainer>
         </form>
-        <h3 className={classes.title}>Your Results:</h3>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={4}>
-            <h3 className={classes.title}>Donuts</h3>
+            {" "}
+            <div id="UserInfo">
+              <h2 className={classes.title} id="vehicleResults">
+                Your Results are:
+              </h2>
+            </div>
           </GridItem>
         </GridContainer>
       </div>

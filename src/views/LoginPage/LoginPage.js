@@ -27,7 +27,7 @@ import { Switch } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 async function signInUser(credentials) {
-  return fetch("http://localhost:8000/api/signin", {
+  return fetch("/api/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

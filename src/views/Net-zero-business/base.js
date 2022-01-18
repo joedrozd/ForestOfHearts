@@ -22,8 +22,11 @@ import StartingInfo from "./Sections/StartingInfo";
 import Reduce_energy from "./Sections/reduce_energy";
 import Transport from "./Sections/transport";
 import WelcomeInfo from "./Sections/welcome";
-import Bolt from "@mui/icons-material/Bolt";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import Draught from "views/Net_zero/Sections/draught_insulation";
+import Consumption from "./Sections/consumption";
+import { Fastfood, OfflineBolt } from "@material-ui/icons";
+import { HelpCenter } from "@mui/icons-material";
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
@@ -70,17 +73,27 @@ export default function NetZeroBusiness(props) {
         <div className={classes.container}>
           <WelcomeInfo />
           <NavPills
-            color="info"
+            color="success"
             tabs={[
               {
-                tabButton: "Reducing Energy",
-                tabIcon: Bolt,
+                tabButton: "Energy",
+                tabIcon: OfflineBolt,
                 tabContent: <Reduce_energy />,
               },
               {
                 tabButton: "Transport",
                 tabIcon: DirectionsCarIcon,
                 tabContent: <Transport />,
+              },
+              {
+                tabButton: "Consumption",
+                tabIcon: Fastfood,
+                tabContent: <Consumption />,
+              },
+              {
+                tabButton: "Miscellaneous",
+                tabIcon: HelpCenter,
+                tabContent: <Draught />,
               },
             ]}
           />

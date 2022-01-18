@@ -25,12 +25,12 @@ import { Box } from "@mui/system";
 import { render } from "react-dom";
 import { Chart } from "react-google-charts";
 import axios from "axios";
-
+import PropTypes from "prop-types";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import Bolt from "@mui/icons-material/Bolt";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-
+import WaveBorder from "./WaveBorder";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import CollapsibleTable from "./carbonfootprinttable";
 import { Link } from "react-router-dom";
@@ -41,20 +41,23 @@ const useStyles = makeStyles(styles);
 
 function populateHeader(obj) {
   const userInfo = document.getElementById("UserInfo");
-  const myH1 = document.createElement("h1");
-  const userDataParsed = obj["data"]["message"]["name"];
-  myH1.textContent = userDataParsed;
-  userInfo.appendChild(myH1);
-  const myPara = document.createElement("p");
-  myPara.textContent = obj["data"]["message"]["email"];
-  userInfo.appendChild(myPara);
+  const myH2 = document.createElement("h2");
+  const userDataParsed = "Welcome " + obj["data"]["message"]["name"];
+  myH2.textContent = userDataParsed;
+  userInfo.replaceWith(myH2);
 }
+
+const stylez = (theme) => ({
+  waveBorder: {
+    paddingTop: theme.spacing(4),
+  },
+});
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(classes.imgRaised, classes.imgFluid);
   const email = localStorage.getItem("email");
-
+  const { theme } = props;
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   axios
     .post("http://localhost:8000/api/userget/", {
@@ -88,6 +91,12 @@ export default function ProfilePage(props) {
         image={require("assets/img/profile-bg.jpg").default}
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
+        <WaveBorder
+          upperColor="#90EE90"
+          lowerColor="#FFFFFF"
+          className={classes.waveBorder}
+          animationNegativeDelay={2}
+        />
         <div>
           <div className={classes.container}>
             <GridContainer justify="center">
@@ -102,22 +111,49 @@ export default function ProfilePage(props) {
                 </div>
               </GridItem>
             </GridContainer>
-            <Box m={4}>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <div>
-                    <h5 className={classes.description}>
-                      Welcome to your profile page. We’re really excited to be
-                      working with you to save our environment and reduce our
-                      carbon footprints!
-                    </h5>
-                  </div>
-                </GridItem>
-              </GridContainer>
-            </Box>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={12}>
+                <div>
+                  <h5 className={classes.title}>
+                    Welcome to your profile page. We’re really excited to be
+                    working with you to save our environment and reduce our
+                    carbon footprints!
+                  </h5>
+                </div>
+              </GridItem>
+            </GridContainer>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={12}>
+                <h5 className={classes.title}>
+                  This page is designed to show you the results of your Carbon
+                  Footprint Net-Zero questionnaire. It tracks all your answers
+                  and then calculates your footprint. The application then takes
+                  your answers and gives you a list of goals based on your
+                  activities.
+                </h5>
+                <GridContainer
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <GridItem xs={12} sm={12} md={2}>
+                    <Link to={"/net-zero-business"}>
+                      <Button color="primary" round>
+                        Net-Zero Quiz
+                      </Button>
+                    </Link>
+                  </GridItem>
+                </GridContainer>
+                <h5 className={classes.title}>
+                  You can change answers in the quiz at any point if your
+                  answers change. This can then recalculate your goals and
+                  change the resources to your new and improved answers.
+                </h5>
+              </GridItem>
+            </GridContainer>
             <Box m={4}>
               <NavPills
-                horizontal={{
+                vertical={{
                   tabsGrid: { xs: 12, sm: 4, md: 2 },
                   contentGrid: { xs: 12, sm: 8, md: 10 },
                 }}
@@ -128,40 +164,6 @@ export default function ProfilePage(props) {
                     tabIcon: SettingsIcon,
                     tabContent: (
                       <div>
-                        <GridContainer>
-                          <GridItem xs={12} sm={12} md={12}>
-                            <h5 className={classes.description}>
-                              This page is designed to show you the results of
-                              your Carbon Footprint Net-Zero questionnaire. It
-                              tracks all your answers and then calculates your
-                              footprint. The application then takes your answers
-                              and gives you a list of goals based on your
-                              activities.
-                            </h5>
-                            <h5 className={classes.description}>
-                              Click the button below to take the quiz!
-                            </h5>
-                            <GridContainer
-                              direction="column"
-                              alignItems="center"
-                              justifyContent="center"
-                            >
-                              <GridItem xs={12} sm={12} md={2}>
-                                <Link to={"/net-zero-business"}>
-                                  <Button color="primary" round>
-                                    Net-Zero Quiz
-                                  </Button>
-                                </Link>
-                              </GridItem>
-                            </GridContainer>
-                            <h5 className={classes.description}>
-                              You can change answers in the quiz at any point if
-                              your answers change. This can then recalculate
-                              your goals and change the resources to your new
-                              and improved answers.
-                            </h5>
-                          </GridItem>
-                        </GridContainer>
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={12}>
                             <Card>
@@ -256,5 +258,7 @@ export default function ProfilePage(props) {
     </div>
   );
 }
-
+ProfilePage.propTypes = {
+  theme: PropTypes.object,
+};
 /* eslint-disable no-unused-vars */
