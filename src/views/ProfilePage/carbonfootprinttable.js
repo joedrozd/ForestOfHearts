@@ -14,26 +14,12 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(name, totalUse, goalUse, reductionAmount) {
   return {
     name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
+    totalUse,
+    goalUse,
+    reductionAmount,
   };
 }
 
@@ -56,10 +42,11 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.totalUse} kg of CO2 per year</TableCell>
+        <TableCell align="right">{row.goalUse} kg of CO2 per year</TableCell>
+        <TableCell align="right">
+          {row.reductionAmount} kg of CO2 per year
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -69,7 +56,7 @@ function Row(props) {
                 Information
               </Typography>
               <Typography variant="p" component="div">
-                Blah Blah Blah.
+                Description of car type!
               </Typography>
             </Box>
           </Collapse>
@@ -81,28 +68,19 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    totalUse: PropTypes.number.isRequired,
+    goalUse: PropTypes.number.isRequired,
+    reductionAmount: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
   }).isRequired,
 };
 
 const rows = [
-  createData("Total footprint", 159, 6.0, 24, 4.0, 3.99),
-  createData("Travel", 237, 9.0, 37, 4.3, 4.99),
-  createData("Consumption", 262, 16.0, 24, 6.0, 3.79),
-  createData("Energy", 305, 3.7, 67, 4.3, 2.5),
-  createData("Other", 356, 16.0, 49, 3.9, 1.5),
+  createData("Total footprint", 159, 6.0, 24),
+  createData("Car 1", 237, 9.0, 37),
+  createData("Car 2", 262, 16.0, 24),
+  createData("Van 1", 305, 3.7, 67),
+  createData("Other", 356, 16.0, 49),
 ];
 
 export default function CollapsibleTable() {
@@ -114,7 +92,6 @@ export default function CollapsibleTable() {
             <TableCell />
             <TableCell>Carbon footprint section</TableCell>
             <TableCell align="right">Your usage</TableCell>
-            <TableCell align="right">Average usage</TableCell>
             <TableCell align="right">Goal usage</TableCell>
             <TableCell align="right">Reduction amount</TableCell>
           </TableRow>

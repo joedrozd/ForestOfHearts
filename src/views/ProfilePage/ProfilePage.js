@@ -36,6 +36,7 @@ import CollapsibleTable from "./carbonfootprinttable";
 import { Link } from "react-router-dom";
 import { ContactSupport } from "@material-ui/icons";
 import ContactSection from "./WorkSection";
+import TransportValues from "./transportValues";
 
 const useStyles = makeStyles(styles);
 
@@ -190,35 +191,7 @@ export default function ProfilePage(props) {
                   {
                     tabButton: "Transport",
                     tabIcon: DirectionsCarIcon,
-                    tabContent: (
-                      <GridContainer justify="center">
-                        <GridItem xs={12} sm={12} md={6}>
-                          <Chart
-                            width={"500px"}
-                            height={"300px"}
-                            chartType="PieChart"
-                            loader={<div>Loading Chart</div>}
-                            data={[
-                              ["Task", "Hours per Day"],
-                              ["Work", 11],
-                              ["Food", 2],
-                              ["Commute", 2],
-                              ["Watch TV", 2],
-                              ["Sleep", 7],
-                            ]}
-                            options={{
-                              title: "My Carbon Usage",
-                              // Just add this option
-                              is3D: true,
-                            }}
-                            rootProps={{ "data-testid": "2" }}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={6}>
-                          <CollapsibleTable></CollapsibleTable>
-                        </GridItem>
-                      </GridContainer>
-                    ),
+                    tabContent: <TransportValues />,
                   },
                   {
                     tabButton: "Reducing Energy",

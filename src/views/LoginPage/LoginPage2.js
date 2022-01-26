@@ -52,6 +52,11 @@ export default function SignUpPage({ setToken }) {
     const data = document.getElementById("name").value;
     const data2 = document.getElementById("email").value;
     const data3 = document.getElementById("password").value;
+    const passValid = data3.length;
+    if (passValid > 22) {
+      alert("Password too long!");
+      return;
+    }
     const user = await signUpUser({
       name: data,
       email: data2,
