@@ -64,8 +64,9 @@ export default function Reduce_energy() {
   const submitForm = async (event) => {
     event.preventDefault(); // Prevent default submission
     const electric = document.getElementById("electricUse").value;
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/energy/`, { electric })
+      .post(`/api/energy/`, { electric, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -79,6 +80,7 @@ export default function Reduce_energy() {
   const submitForm2 = async (event) => {
     event.preventDefault(); // Prevent default submission
     const gas = document.getElementById("gasUse").value;
+
     axios
       .post(`/api/gas/`, { gas })
       .then((res) => {
