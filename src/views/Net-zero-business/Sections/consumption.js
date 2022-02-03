@@ -4,6 +4,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import "./results.css";
 // @material-ui/icons
 /* eslint-disable no-unused-vars */
 // core components
@@ -130,8 +131,9 @@ export default function Consumption() {
   const submitFormAlcohol = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("alcoholUse").value;
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/alcohol/`, { data })
+      .post(`/api/alcohol/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -145,8 +147,9 @@ export default function Consumption() {
   const submitFormBaked = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("bakedUse").value;
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/baked/`, { data })
+      .post(`/api/baked/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -160,8 +163,10 @@ export default function Consumption() {
   const submitFormCereals = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("cerealUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/cereals/`, { data })
+      .post(`/api/cereals/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -175,8 +180,10 @@ export default function Consumption() {
   const submitFormCoffee = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("coffeeUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/coffee/`, { data })
+      .post(`/api/coffee/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -190,8 +197,10 @@ export default function Consumption() {
   const submitFormCosmetics = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("cosmeticsUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/cosmetics/`, { data })
+      .post(`/api/cosmetics/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -205,8 +214,10 @@ export default function Consumption() {
   const submitFormSeafood = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("seafoodUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/seafood/`, { data })
+      .post(`/api/seafood/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -220,8 +231,10 @@ export default function Consumption() {
   const submitFormFruitjuice = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("fruitjuiceUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/fruitjuice/`, { data })
+      .post(`/api/fruitjuice/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -235,8 +248,10 @@ export default function Consumption() {
   const submitFormFruit = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("fruitUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/fruit/`, { data })
+      .post(`/api/fruit/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -250,8 +265,10 @@ export default function Consumption() {
   const submitFormLaundry = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("laundryUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/laundry/`, { data })
+      .post(`/api/laundry/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -265,8 +282,10 @@ export default function Consumption() {
   const submitFormMeat = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("meatUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/meat/`, { data })
+      .post(`/api/meat/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -280,8 +299,10 @@ export default function Consumption() {
   const submitFormDairy = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("dairyUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/dairy/`, { data })
+      .post(`/api/dairy/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -295,8 +316,10 @@ export default function Consumption() {
   const submitFormPastry = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("pastryUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/pastry/`, { data })
+      .post(`/api/pastry/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -310,8 +333,10 @@ export default function Consumption() {
   const submitFormSugar = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("sugarUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/sugar/`, { data })
+      .post(`/api/sugar/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -325,8 +350,10 @@ export default function Consumption() {
   const submitFormPet = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("petUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/pet/`, { data })
+      .post(`/api/pet/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -340,8 +367,10 @@ export default function Consumption() {
   const submitFormSoft = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("softUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/soft/`, { data })
+      .post(`/api/soft/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -355,8 +384,10 @@ export default function Consumption() {
   const submitFormTobacco = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("tobaccoUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/tobacco/`, { data })
+      .post(`/api/tobacco/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -370,8 +401,10 @@ export default function Consumption() {
   const submitFormLoo = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("looUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/loo/`, { data })
+      .post(`/api/loo/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -386,8 +419,10 @@ export default function Consumption() {
   const submitFormCleaning = async (event) => {
     event.preventDefault(); // Prevent default submission
     const data = document.getElementById("cleaningUse").value;
+
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/cleaning/`, { data })
+      .post(`/api/cleaning/`, { data, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -426,8 +461,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="alcoholResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="alcoholResults">
                   Your Results are:
                 </h3>
               </div>
@@ -456,8 +491,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="bakedResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="bakedResults">
                   Your Results are:
                 </h3>
               </div>
@@ -486,8 +521,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="cerealResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="cerealResults">
                   Your Results are:
                 </h3>
               </div>
@@ -514,8 +549,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="coffeeResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="coffeeResults">
                   Your Results are:
                 </h3>
               </div>
@@ -542,8 +577,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="cosmeticsResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="cosmeticsResults">
                   Your Results are:
                 </h3>
               </div>
@@ -572,8 +607,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="dairyResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="dairyResults">
                   Your Results are:
                 </h3>
               </div>
@@ -600,8 +635,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="petResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="petResults">
                   Your Results are:
                 </h3>
               </div>
@@ -630,8 +665,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="softResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="softResults">
                   Your Results are:
                 </h3>
               </div>
@@ -660,8 +695,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="looResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="looResults">
                   Your Results are:
                 </h3>
               </div>
@@ -688,8 +723,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="seafoodResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="seafoodResults">
                   Your Results are:
                 </h3>
               </div>
@@ -718,8 +753,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="fruitjuiceResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="fruitjuiceResults">
                   Your Results are:
                 </h3>
               </div>
@@ -748,8 +783,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="fruitResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="fruitResults">
                   Your Results are:
                 </h3>
               </div>
@@ -778,8 +813,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="laundryResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="laundryResults">
                   Your Results are:
                 </h3>
               </div>
@@ -806,8 +841,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="meatResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="meatResults">
                   Your Results are:
                 </h3>
               </div>
@@ -834,8 +869,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="pastryResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="pastryResults">
                   Your Results are:
                 </h3>
               </div>
@@ -862,8 +897,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="sugarResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="sugarResults">
                   Your Results are:
                 </h3>
               </div>
@@ -890,8 +925,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="tobaccoResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="tobaccoResults">
                   Your Results are:
                 </h3>
               </div>
@@ -920,8 +955,8 @@ export default function Consumption() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h3 className={classes.title} id="cleaningResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="cleaningResults">
                   Your Results are:
                 </h3>
               </div>

@@ -4,6 +4,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import "./results.css";
 // @material-ui/icons
 /* eslint-disable no-unused-vars */
 // core components
@@ -53,8 +54,9 @@ export default function Transport() {
       "-fuel_source_" +
       vehicleType +
       "-engine_size_na-vehicle_age_na-vehicle_weight_na";
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/vehicle/`, { data, data2 })
+      .post(`/api/vehicle/`, { data, data2, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -202,10 +204,10 @@ export default function Transport() {
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={4}>
             {" "}
-            <div id="UserInfo">
-              <h2 className={classes.title} id="vehicleResults">
+            <div id="UserInfo" className="results">
+              <h3 className={classes.title.white} id="vehicleResults">
                 Your Results are:
-              </h2>
+              </h3>
             </div>
           </GridItem>
         </GridContainer>

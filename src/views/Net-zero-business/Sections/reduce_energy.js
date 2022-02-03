@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
+import "./results.css";
 // @material-ui/icons
 /* eslint-disable no-unused-vars */
 // core components
@@ -80,9 +80,9 @@ export default function Reduce_energy() {
   const submitForm2 = async (event) => {
     event.preventDefault(); // Prevent default submission
     const gas = document.getElementById("gasUse").value;
-
+    const email = localStorage.getItem("email");
     axios
-      .post(`/api/gas/`, { gas })
+      .post(`/api/gas/`, { gas, email })
       .then((res) => {
         const returnText = res.data;
         console.log(returnText);
@@ -143,10 +143,10 @@ export default function Reduce_energy() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo">
-                <h2 className={classes.title} id="energyResults">
+              <div id="UserInfo" className="results">
+                <h3 className={classes.title.white} id="energyResults">
                   Your Results are:
-                </h2>
+                </h3>
               </div>
             </div>
           </GridContainer>
@@ -169,10 +169,10 @@ export default function Reduce_energy() {
               </Button>
             </GridItem>
             <div>
-              <div id="UserInfo2">
-                <h2 className={classes.title} id="gasResults">
+              <div id="UserInfo2" className="results">
+                <h3 className={classes.title.white} id="gasResults">
                   Your Results are:
-                </h2>
+                </h3>
               </div>
             </div>
           </GridContainer>

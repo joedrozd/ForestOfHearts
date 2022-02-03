@@ -11,13 +11,12 @@ import NetZeroBusiness from "views/Net-zero-business/base";
 
 export default function App() {
   const { token, setToken } = useToken();
-
+  // Log in token authenticated with backend app
   if (!token) {
     return (
       <div className="wrapper">
         <BrowserRouter>
           <Switch>
-            <Route path="/net-zero" component={NetZeroBusiness} />
             <Route path="/community-building" component={CarbonOffsetting} />
             <Route path="/lol" component={Components} />
             <Route path="/login-page">

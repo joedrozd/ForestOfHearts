@@ -66,17 +66,6 @@ export default function HeaderLinks(props) {
           target="_blank"
           
         >
-          <Link to="/net-zero" className={classes.navLink}>
-              Net Zero
-            </Link>
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          target="_blank"
-          
-        >
           <Link to="/login-page" className={classes.navLink}>
               Login
             </Link>
@@ -174,17 +163,6 @@ export default function HeaderLinks(props) {
         >
           <Link to="/net-zero" className={classes.navLink}>
               Net Zero
-            </Link>
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          target="_blank"
-          
-        >
-          <Link to="/net-zero-business" className={classes.navLink}>
-              Net Zero Business
             </Link>
         </Button>
       </ListItem>
